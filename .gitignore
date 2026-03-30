@@ -4,3 +4,5 @@ node_modules
 .eslintcache
 tsconfig.tsbuildinfo
 dist
+/packages/telraam-js/openapi.json
+/packages/telraam-js/src/telraam.ts

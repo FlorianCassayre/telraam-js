@@ -9,7 +9,10 @@ export default defineConfig([
     ...config,
     ignores: ['packages/**'],
   })),
-  ...withBase('./packages/telraam-js'),
+  ...withBase('./packages/telraam-js').map((config) => ({
+    ...config,
+    ignores: ['packages/telraam-js/src/telraam.ts'],
+  })),
   ...withReact('./packages/telraam-visualizer'),
   globalIgnores(['**/node_modules/**', '**/dist/**', '**/out/**', '**/build/**']),
 ]);

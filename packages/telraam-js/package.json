@@ -1,5 +1,16 @@
 {
   "name": "telraam-js",
   "version": "0.1.0",
-  "type": "module"
+  "type": "module",
+  "scripts": {
+    "openapi:download": "curl -o openapi.json https://app.swaggerhub.com/apiproxy/registry/telraam/Telraam-API/1.2.0",
+    "openapi:generate": "openapi-zod-client openapi.json -o src/telraam.ts"
+  },
+  "dependencies": {
+    "@zodios/core": "^10.9.6",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "openapi-zod-client": "^1.18.3"
+  }
 }
