@@ -15,6 +15,14 @@ export const withBase = (directory) => [
       import: importPlugin,
       'unused-imports': unusedImports,
     },
+    settings: {
+      'import/resolver': {
+        typescript: {
+          alwaysTryTypes: true,
+          project: `${directory}/tsconfig.json`,
+        },
+      },
+    },
     rules: {
       'prettier/prettier': [
         'error',

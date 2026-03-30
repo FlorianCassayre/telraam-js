@@ -7,6 +7,6 @@
     { "path": "packages/telraam-js" },
     { "path": "packages/telraam-visualizer" }
   ],
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "**/*.mjs"],
   "exclude": ["packages/**"]
 }
