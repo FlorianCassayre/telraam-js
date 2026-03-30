@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "composite": false
+  },
+  "references": [
+    { "path": "packages/telraam-js" },
+    { "path": "packages/telraam-visualizer" }
+  ],
+  "include": ["**/*.ts"],
+  "exclude": ["packages/**"]
+}
