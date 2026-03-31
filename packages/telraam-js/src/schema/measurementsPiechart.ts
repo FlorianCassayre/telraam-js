@@ -1,6 +1,7 @@
+import { makeEndpoint } from '@zodios/core';
 import { z } from 'zod';
 
-import { getSegmentTimeRange } from './common';
+import { dateIso, idSchema } from './common';
 
 export const measurementsPiechartSchema = z.object({
   pedestrian: z.number(),
@@ -33,7 +34,14 @@ export const measurementsPiechartSchema = z.object({
   piedata10modes: z.array(z.number()),
 });
 
-export const measurementsPiechartGetRoute = getSegmentTimeRange({
-  path: '/measurements-piechart',
-  schema: measurementsPiechartSchema,
+export const measurementsPiechartGetRoute = makeEndpoint({
+  method: 'get',
+  path: '/measurements-piechart/segments/:id/:from/:to',
+  alias: 'getMeasurementsPiechart',
+  parameters: [
+    { name: 'id', type: 'Path', schema: idSchema },
+    { name: 'from', type: 'Path', schema: dateIso },
+    { name: 'to', type: 'Path', schema: dateIso },
+  ],
+  response: measurementsPiechartSchema,
 });

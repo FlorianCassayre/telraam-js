@@ -1,6 +1,7 @@
+import { makeEndpoint } from '@zodios/core';
 import { z } from 'zod';
 
-import { getSegmentTimeRange } from './common';
+import { dateIso, idSchema } from './common';
 
 export const measurementsSpeedSchema = z.object({
   data: z.object({
@@ -26,7 +27,14 @@ export const measurementsSpeedSchema = z.object({
   labels: z.array(z.string()),
 });
 
-export const measurementsSpeedGetRoute = getSegmentTimeRange({
-  path: '/measurements-speed',
-  schema: measurementsSpeedSchema,
+export const measurementsSpeedGetRoute = makeEndpoint({
+  method: 'get',
+  path: '/measurements-speed/segments/:id/:from/:to',
+  alias: 'getMeasurementsSpeed',
+  parameters: [
+    { name: 'id', type: 'Path', schema: idSchema },
+    { name: 'from', type: 'Path', schema: dateIso },
+    { name: 'to', type: 'Path', schema: dateIso },
+  ],
+  response: measurementsSpeedSchema,
 });

@@ -1,7 +1,9 @@
-import { z } from '../z';
-import { get } from './common';
+import { makeEndpoint } from '@zodios/core';
+import { z } from 'zod';
 
-export const segmentsSchema = z.object({
+import { idSchema } from './common';
+
+export const segmentSchema = z.object({
   status_code: z.number(),
   message: z.string(),
   type: z.string(),
@@ -45,8 +47,10 @@ export const segmentsSchema = z.object({
   ),
 });
 
-export const segmentsGetRoute = get({
-  path: '/segments/id/{id}',
-  params: z.object({ id: z.int() }),
-  schema: segmentsSchema,
+export const segmentGetRoute = makeEndpoint({
+  method: 'get',
+  path: '/segments/id/:id',
+  alias: 'getSegment',
+  parameters: [{ name: 'id', type: 'Path', schema: idSchema }] as const,
+  response: segmentSchema,
 });

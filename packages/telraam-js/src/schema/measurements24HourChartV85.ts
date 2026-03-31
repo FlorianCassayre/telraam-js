@@ -1,6 +1,7 @@
+import { makeEndpoint } from '@zodios/core';
 import { z } from 'zod';
 
-import { getSegmentTimeRange } from './common';
+import { dateIso, idSchema } from './common';
 
 export const measurements24HourChartV85Schema = z.object({
   labels: z.array(z.string()),
@@ -11,7 +12,14 @@ export const measurements24HourChartV85Schema = z.object({
   }),
 });
 
-export const measurements24HourChartV85GetRoute = getSegmentTimeRange({
-  path: '/measurements-24-hour-chart-v85',
-  schema: measurements24HourChartV85Schema,
+export const measurements24HourChartV85GetRoute = makeEndpoint({
+  method: 'get',
+  path: '/measurements-24-hour-chart-v85/segments/:id/:from/:to',
+  alias: 'getMeasurements24HourChartV85',
+  parameters: [
+    { name: 'id', type: 'Path', schema: idSchema },
+    { name: 'from', type: 'Path', schema: dateIso },
+    { name: 'to', type: 'Path', schema: dateIso },
+  ],
+  response: measurements24HourChartV85Schema,
 });
