@@ -1,3 +1,9 @@
 import React from 'react';
 
-export const Page: React.FC = () => <div>Hello world!</div>;
+import { TelraamDayDashboard } from '../../components/TelraamDayDashboard';
+
+export const Page: React.FC = () => (
+  <div>
+    <TelraamDayDashboard />
+  </div>
+);
