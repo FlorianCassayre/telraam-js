@@ -53,6 +53,7 @@ export const measurementsDayBarchartGetRoute = makeEndpoint({
   method: 'get',
   path: '/measurements-day-barchart/segments/:id/:from/:to',
   alias: 'getMeasurementsDayBarchart',
+  description: 'Number of vehicles by type per day. Corresponds to the "Daily overview".',
   parameters: [
     { name: 'id', type: 'Path', schema: idSchema },
     { name: 'from', type: 'Path', schema: dateIso },

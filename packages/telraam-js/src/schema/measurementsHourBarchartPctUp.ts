@@ -27,7 +27,8 @@ export const measurementsHourBarchartPctUpSchema = z.object({
 export const measurementsHourBarchartPctUpGetRoute = makeEndpoint({
   method: 'get',
   path: '/measurements-hour-barchart-pct-up/segments/:id/:from/:to',
-  alias: 'getMeasurementsHourBarchartPctUpGetRoute',
+  alias: 'getMeasurementsHourBarchartPctUp',
+  description: 'Number of vehicles by type per hour. Corresponds to the "Overview in detail".',
   parameters: [
     { name: 'id', type: 'Path', schema: idSchema },
     { name: 'from', type: 'Path', schema: dateIso },

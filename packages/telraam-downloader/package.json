@@ -1,0 +1,13 @@
+{
+  "type": "module",
+  "scripts": {
+    "download": "npx tsx ./src/script.ts"
+  },
+  "dependencies": {
+    "telraam-js": "workspace:*",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0"
+  }
+}

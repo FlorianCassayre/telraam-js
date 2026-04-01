@@ -32,6 +32,7 @@ export const measurements24HourChartGetRoute = makeEndpoint({
   method: 'get',
   path: '/measurements-24-hour-chart/segments/:id/:from/:to',
   alias: 'getMeasurements24HourChart',
+  description: 'Average number of vehicles by type per hour in 24 hours. Corresponds to the "24 hour average".',
   parameters: [
     { name: 'id', type: 'Path', schema: idSchema },
     { name: 'from', type: 'Path', schema: dateIso },

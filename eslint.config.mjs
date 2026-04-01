@@ -10,6 +10,7 @@ export default defineConfig([
     ignores: ['packages/**'],
   })),
   ...withBase('./packages/telraam-js'),
+  ...withBase('./packages/telraam-downloader'),
   ...withReact('./packages/telraam-visualizer'),
   globalIgnores(['**/node_modules/**', '**/dist/**', '**/out/**', '**/build/**']),
 ]);

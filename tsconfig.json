@@ -5,6 +5,7 @@
   },
   "references": [
     { "path": "packages/telraam-js" },
+    { "path": "packages/telraam-downloader" },
     { "path": "packages/telraam-visualizer" }
   ],
   "include": ["**/*.ts", "**/*.mjs"],

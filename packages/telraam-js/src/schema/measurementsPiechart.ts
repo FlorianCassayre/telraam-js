@@ -38,6 +38,7 @@ export const measurementsPiechartGetRoute = makeEndpoint({
   method: 'get',
   path: '/measurements-piechart/segments/:id/:from/:to',
   alias: 'getMeasurementsPiechart',
+  description: 'Distribution of vehicle type. Corresponds to the "Modal split".',
   parameters: [
     { name: 'id', type: 'Path', schema: idSchema },
     { name: 'from', type: 'Path', schema: dateIso },
