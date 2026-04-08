@@ -5,4 +5,5 @@ node_modules
 tsconfig.tsbuildinfo
 dist
 /packages/telraam-downloader/data
+/packages/telraam-aggregator/data
 /packages/telraam-visualizer/public/data

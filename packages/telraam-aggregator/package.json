@@ -1,10 +1,10 @@
 {
-  "name": "telraam-downloader",
   "type": "module",
   "scripts": {
-    "download": "npx tsx ./src/script.ts"
+    "aggregate": "npx tsx ./src/script.ts"
   },
   "dependencies": {
+    "telraam-downloader": "workspace:*",
     "telraam-js": "workspace:*",
     "zod": "^3.25.76"
   },

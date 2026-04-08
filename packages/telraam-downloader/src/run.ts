@@ -5,6 +5,9 @@ import { segmentSchema } from 'telraam-js/src/schema/segment';
 import { telraamApi } from 'telraam-js/src/telraamApi';
 import { z } from 'zod';
 
+import { dailyDataFile, DailyFile } from './DailyFile';
+import { writeDataFile } from './ParametrizedDataFile';
+
 const getTemporalData = (payload: { params: { id: number; from: string; to: string } }) =>
   Promise.all([
     telraamApi.getMeasurements24HourChartDirection(payload),
@@ -40,19 +43,6 @@ const fileExists = async (p: string): Promise<boolean> => {
   }
 };
 
-const readExistingDates = async (dir: string): Promise<Set<string>> => {
-  try {
-    const files = await fs.readdir(dir);
-    return new Set(files.filter((f) => f.endsWith('.json')).map((f) => f.replace('.json', '')));
-  } catch {
-    return new Set();
-  }
-};
-
-const writeJson = async (filePath: string, data: unknown) => {
-  await fs.writeFile(filePath, JSON.stringify(data));
-};
-
 const extractRange = (segment: z.infer<typeof segmentSchema>) => {
   const props = segment.features[0].properties;
   const extractDate = (s: string) => s.split('T')[0];
@@ -64,9 +54,6 @@ const extractRange = (segment: z.infer<typeof segmentSchema>) => {
 
 export const run = async ({ outputPath, segmentIds }: Config) => {
   for (const segmentId of segmentIds) {
-    const segmentDir = path.join(outputPath, String(segmentId));
-    await fs.mkdir(segmentDir, { recursive: true });
-
     console.log(`Fetching segment ${segmentId}...`);
 
     // 1. Fetch segment info
@@ -81,25 +68,19 @@ export const run = async ({ outputPath, segmentIds }: Config) => {
     const fromDate = formatDate(parseDate(from));
     const toDate = formatDate(parseDate(to));
 
-    // 2. Read existing files
-    const existingDates = await readExistingDates(segmentDir);
-
-    // 3. Find first missing date
+    // 2 & 3. Find first missing date by peeking sequentially
     let current = fromDate;
-    let firstMissing: string | null = null;
+    let firstMissing: string = toDate; // By default, the last date
 
     while (current <= toDate) {
-      const key = current;
-      if (!existingDates.has(key)) {
+      const dataFile = dailyDataFile({ segmentId, day: current });
+
+      const expectedPath = path.join(outputPath, dataFile.path);
+      if (!(await fileExists(expectedPath))) {
         firstMissing = current;
         break;
       }
       current = addDaysStr(current, 1);
-    }
-
-    if (!firstMissing) {
-      console.log('Nothing to sync');
-      continue;
     }
 
     // 4. Start one day before (in case the previous day had partial data)
@@ -114,8 +95,6 @@ export const run = async ({ outputPath, segmentIds }: Config) => {
     let day = start;
 
     while (day <= toDate) {
-      const filePath = path.join(segmentDir, `${day}.json`);
-
       const payload = {
         params: {
           id: segmentId,
@@ -131,17 +110,11 @@ export const run = async ({ outputPath, segmentIds }: Config) => {
         measurements24HourChartDirection: result.measurements24HourChartDirection.data,
         measurementsSpeed: result.measurementsSpeed.data,
         measurements24HourChartV85: result.measurements24HourChartV85.data,
-      };
+      } satisfies DailyFile;
 
-      let changed = true;
-
-      if (await fileExists(filePath)) {
-        const existing = JSON.parse(await fs.readFile(filePath, 'utf-8'));
-        changed = JSON.stringify(existing) !== JSON.stringify(normalized);
-      }
+      const changed = writeDataFile(outputPath, dailyDataFile({ segmentId, day }), normalized);
 
       if (changed) {
-        await writeJson(filePath, normalized);
         console.log(`${segmentId}/${day}: saved`);
       } else {
         console.log(`${segmentId}/${day}: unchanged`);

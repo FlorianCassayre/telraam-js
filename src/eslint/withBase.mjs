@@ -2,18 +2,18 @@ import tsParser from '@typescript-eslint/parser';
 import importPlugin from 'eslint-plugin-import';
 import prettier from 'eslint-plugin-prettier';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
-import unusedImports from 'eslint-plugin-unused-imports';
+import typescriptEslint from 'typescript-eslint';
 
 import { paths } from './paths.mjs';
 
 export const withBase = (directory) => [
+  ...typescriptEslint.configs.recommended,
   {
     files: [paths(directory)],
     plugins: {
       prettier,
       'simple-import-sort': simpleImportSort,
       import: importPlugin,
-      'unused-imports': unusedImports,
     },
     settings: {
       'import/resolver': {
@@ -65,11 +65,6 @@ export const withBase = (directory) => [
       // No default exports
       'import/no-default-export': 'error',
       // No unused
-      'unused-imports/no-unused-imports': 'error',
-      'unused-imports/no-unused-vars': [
-        'error',
-        { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' },
-      ],
     },
     languageOptions: { parser: tsParser },
   },
