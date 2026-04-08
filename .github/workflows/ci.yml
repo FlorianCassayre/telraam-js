@@ -1,0 +1,19 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use pnpm
+        uses: pnpm/action-setup@v5
+      - name: Use Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+      - run: pnpm i
+      - run: pnpm --filter ./packages/telraam-visualizer build
+      - run: pnpm run compile
+      - run: pnpm run lint
