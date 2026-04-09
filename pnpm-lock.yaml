@@ -136,6 +136,12 @@ importers:
       react-dom:
         specifier: ^19.2.4
         version: 19.2.4(react@19.2.4)
+      telraam-aggregator:
+        specifier: workspace:*
+        version: link:../telraam-aggregator
+      telraam-downloader:
+        specifier: workspace:*
+        version: link:../telraam-downloader
       telraam-js:
         specifier: workspace:*
         version: link:../telraam-js

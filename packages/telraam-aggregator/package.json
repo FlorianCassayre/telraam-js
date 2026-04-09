@@ -1,4 +1,5 @@
 {
+  "name": "telraam-aggregator",
   "type": "module",
   "scripts": {
     "aggregate": "npx tsx ./src/script.ts"

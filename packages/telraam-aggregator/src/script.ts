@@ -13,7 +13,11 @@ void aggregate({
   inputPath,
   outputPath,
   config: {
-    [AggregationTimeType.All]: { [AggregationTimeType.Day]: true },
+    [AggregationTimeType.All]: {
+      [AggregationTimeType.Week]: true,
+      [AggregationTimeType.Day]: true,
+    },
+    [AggregationTimeType.Day]: { [AggregationTimeType.Hour]: true },
     [AggregationTimeType.Month]: { [AggregationTimeType.Week]: true },
   },
 });
