@@ -1,7 +1,7 @@
-import { aggregatedSchema } from './aggregatedSchema';
-import { getAggregationDataFile } from './AggregationDataFile';
+import { aggregatedMetaSchema, aggregatedSchema } from './aggregatedSchema';
+import { getAggregationDataFile, getAggregationMetaDataFile } from './AggregationDataFile';
 import { AggregationTimeType } from './AggregationTime';
 
-export { aggregatedSchema };
-export { getAggregationDataFile };
+export { aggregatedMetaSchema, aggregatedSchema };
+export { getAggregationDataFile, getAggregationMetaDataFile };
 export { AggregationTimeType };

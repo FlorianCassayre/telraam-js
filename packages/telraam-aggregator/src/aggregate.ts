@@ -6,7 +6,7 @@ import { z } from 'zod';
 
 import { aggregatedSchema } from './aggregatedSchema';
 import { AggregationConfig, flattenAggregationConfig } from './AggregationConfig';
-import { getAggregationDataFile } from './AggregationDataFile';
+import { getAggregationDataFile, getAggregationMetaDataFile } from './AggregationDataFile';
 import { getAggregationKey } from './AggregationTime';
 import { concatenateAggregations, mergeAggregations } from './merge';
 import { groupReduce, sortValues, stringIntegerSchema } from './utils';
@@ -103,6 +103,11 @@ const aggregateSegment = ({
         console.log(`Wrote: ${dataFile.path}`);
       }
     });
+
+    const metaDataFile = getAggregationMetaDataFile()({ segmentId, range, step });
+    if (writeDataFile(outputPath, metaDataFile, { keys: Object.keys(reducedFiles) })) {
+      console.log(`Wrote: ${metaDataFile.path}`);
+    }
   });
 };
 

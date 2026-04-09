@@ -19,3 +19,7 @@ export const aggregatedSchema = z.object({
     measurements24HourChartV85: measurements24HourChartV85Schema.shape.data,
   }),
 });
+
+export const aggregatedMetaSchema = z.object({
+  keys: z.array(z.string()),
+});
