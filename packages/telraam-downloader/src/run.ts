@@ -1,8 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import { segmentSchema } from 'telraam-js/src/schema/segment';
-import { telraamApi } from 'telraam-js/src/telraamApi';
+import { segmentSchema, telraamApi } from 'telraam-js';
 import { z } from 'zod';
 
 import { dailyDataFile, DailyFile } from './DailyFile';

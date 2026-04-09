@@ -1,7 +1,7 @@
-import { existsSync, mkdirSync, readdirSync, readFileSync, statSync } from 'fs';
-import { dirname, join } from 'path';
-import { DailyFile } from 'telraam-downloader/src/DailyFile';
-import { writeDataFile } from 'telraam-downloader/src/ParametrizedDataFile';
+import { existsSync, mkdirSync, readdirSync, readFileSync, statSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+
+import { DailyFile, writeDataFile } from 'telraam-downloader';
 import { z } from 'zod';
 
 import { aggregatedSchema } from './aggregatedSchema';

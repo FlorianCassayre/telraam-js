@@ -4,6 +4,9 @@
   "scripts": {
     "download": "npx tsx ./src/script.ts"
   },
+  "exports": {
+    ".": "./src/index.ts"
+  },
   "dependencies": {
     "telraam-js": "workspace:*",
     "zod": "^3.25.76"

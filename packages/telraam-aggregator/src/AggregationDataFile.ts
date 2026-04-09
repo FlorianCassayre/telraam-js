@@ -1,4 +1,4 @@
-import { ParametrizedDataFile } from 'telraam-downloader/src/ParametrizedDataFile';
+import { ParametrizedDataFile } from 'telraam-downloader';
 import { z } from 'zod';
 
 import { aggregatedSchema } from './aggregatedSchema';

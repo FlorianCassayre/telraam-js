@@ -1,6 +1,8 @@
-import { measurements24HourChartDirectionSchema } from 'telraam-js/src/schema/measurements24HourChartDirection';
-import { measurements24HourChartV85Schema } from 'telraam-js/src/schema/measurements24HourChartV85';
-import { measurementsSpeedSchema } from 'telraam-js/src/schema/measurementsSpeed';
+import {
+  measurements24HourChartDirectionSchema,
+  measurements24HourChartV85Schema,
+  measurementsSpeedSchema,
+} from 'telraam-js';
 import { z } from 'zod';
 
 import { ParametrizedDataFile } from './ParametrizedDataFile';

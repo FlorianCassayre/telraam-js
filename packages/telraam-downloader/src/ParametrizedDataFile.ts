@@ -1,6 +1,6 @@
-import { existsSync } from 'fs';
-import { mkdirSync, readFileSync, writeFileSync } from 'fs';
-import { dirname, join } from 'path';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+
 import { z } from 'zod';
 
 export type ParametrizedDataFile<In, Out extends object> = (parameters: In) => DataFile<Out>;

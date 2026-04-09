@@ -3,6 +3,9 @@
   "scripts": {
     "aggregate": "npx tsx ./src/script.ts"
   },
+  "exports": {
+    ".": "./src/index.ts"
+  },
   "dependencies": {
     "telraam-downloader": "workspace:*",
     "telraam-js": "workspace:*",

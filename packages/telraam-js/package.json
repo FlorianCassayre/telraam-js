@@ -2,6 +2,9 @@
   "name": "telraam-js",
   "version": "0.1.0",
   "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
   "dependencies": {
     "@zodios/core": "^10.9.6",
     "axios": "^1.14.0",

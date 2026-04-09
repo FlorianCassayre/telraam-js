@@ -1,5 +1,4 @@
-import { measurements24HourChartDirectionSchema } from 'telraam-js/src/schema/measurements24HourChartDirection';
-import { measurements24HourChartV85Schema } from 'telraam-js/src/schema/measurements24HourChartV85';
+import { measurements24HourChartDirectionSchema, measurements24HourChartV85Schema } from 'telraam-js';
 import { z, ZodRawShape, ZodTypeAny } from 'zod';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

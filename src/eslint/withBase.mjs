@@ -42,6 +42,10 @@ export const withBase = (directory) => [
       // Imports sorting
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
+      'import/no-duplicates': 'error',
+      // Normalize Node imports
+      'import/no-nodejs-modules': 'off',
+      'import/enforce-node-protocol-usage': ['error', 'always'],
       // No extensions on imports
       'import/extensions': [
         'error',

@@ -7,11 +7,6 @@ export enum AggregationTimeType {
   All = 'all',
 }
 
-export interface AggregationTime {
-  step: AggregationTimeType;
-  range: AggregationTimeType;
-}
-
 export const getAggregationKey = (date: string, hour: string, type: AggregationTimeType): string => {
   switch (type) {
     case AggregationTimeType.Hour:
