@@ -8,7 +8,7 @@ import { z } from 'zod';
 import { ParametrizedDataFile } from './ParametrizedDataFile';
 
 export const dailyFileSchema = z.object({
-  measurements24HourChartDirection: measurements24HourChartDirectionSchema.shape.data,
+  measurements24HourChartDirection: measurements24HourChartDirectionSchema.shape.data.options[0],
   measurementsSpeed: measurementsSpeedSchema.shape.data,
   measurements24HourChartV85: measurements24HourChartV85Schema.shape.data,
 });

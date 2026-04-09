@@ -1,10 +1,10 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import { segmentSchema, telraamApi } from 'telraam-js';
+import { measurements24HourChartDirectionSchema, segmentSchema, telraamApi } from 'telraam-js';
 import { z } from 'zod';
 
-import { dailyDataFile, DailyFile } from './DailyFile';
+import { dailyDataFile, DailyFile, dailyFileSchema } from './DailyFile';
 import { writeDataFile } from './ParametrizedDataFile';
 
 const getTemporalData = (payload: { params: { id: number; from: string; to: string } }) =>
@@ -106,7 +106,14 @@ export const run = async ({ outputPath, segmentIds }: Config) => {
       const result = await getTemporalData(payload);
 
       const normalized = {
-        measurements24HourChartDirection: result.measurements24HourChartDirection.data,
+        measurements24HourChartDirection: !Array.isArray(result.measurements24HourChartDirection.data)
+          ? result.measurements24HourChartDirection.data
+          : (Object.fromEntries(
+              Object.keys(measurements24HourChartDirectionSchema.shape.data.options[0].shape).map((k) => [
+                k,
+                Array.from({ length: 24 }, () => 0),
+              ]),
+            ) as z.infer<typeof dailyFileSchema>['measurements24HourChartDirection']),
         measurementsSpeed: result.measurementsSpeed.data,
         measurements24HourChartV85: result.measurements24HourChartV85.data,
       } satisfies DailyFile;

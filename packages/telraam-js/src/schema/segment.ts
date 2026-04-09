@@ -19,8 +19,9 @@ export const segmentSchema = z.object({
         first_data_package: z.string(),
         last_data_package: z.string(),
         timezone: z.string(),
-        instance_ids: z.object({
-          10671: z.object({
+        instance_ids: z.record(
+          z.string().regex(/\d+/),
+          z.object({
             mac: z.number(),
             manual: z.boolean(),
             status: z.string(),
@@ -41,7 +42,7 @@ export const segmentSchema = z.object({
             first_data_package: z.string(),
             is_calibration_done: z.string(),
           }),
-        }),
+        ),
       }),
     }),
   ),

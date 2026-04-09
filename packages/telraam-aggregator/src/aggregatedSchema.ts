@@ -14,7 +14,7 @@ const arrayifySchema = <T extends ZodRawShape>(schema: z.ZodObject<T>) => {
 export const aggregatedSchema = z.object({
   labels: z.array(z.string()),
   data: z.object({
-    measurements24HourChartDirection: measurements24HourChartDirectionSchema.shape.data,
+    measurements24HourChartDirection: measurements24HourChartDirectionSchema.shape.data.options[0],
     //measurementsSpeed: arrayifySchema(measurementsSpeedSchema.shape.data),
     measurements24HourChartV85: measurements24HourChartV85Schema.shape.data,
   }),
